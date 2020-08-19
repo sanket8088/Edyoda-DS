@@ -4,11 +4,13 @@ const balancePara = (mStr) => {
     stack = []
     start = ["[", "{", "("]
     end = ["]", "}", ")"]
+    c=0
     for (i = 0; i < mStr.length; i++) {
         if (start.includes(mStr[i])) {
             stack.push(mStr[i])
         }
         else if (end.includes(mStr[i])) {
+            c++
             closeIndex = end.indexOf(mStr[i])
             lastIndex = start.indexOf(stack[stack.length - 1])
             if (closeIndex === lastIndex) {
@@ -24,6 +26,9 @@ const balancePara = (mStr) => {
         return "Success"
     }
     else {
+        if (c == 0) {
+            return 1
+        }
         return mStr.indexOf(stack[stack.length - 1]) + 1
     }
 
